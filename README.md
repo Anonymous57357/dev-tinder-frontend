@@ -19,6 +19,10 @@
 - Navbar should update as soon as user logs in
 - User react router dom (useNavigate) library for routing
 - Refactor our code to add CONSTANTS file + create a camponent folder
+- CORS - install cors in backend => add middleware to with configurations with{ credentials : true }
+
+
+- when
 
 ## project tree structure
 

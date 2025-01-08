@@ -1,35 +1,37 @@
 import { useState } from 'react';
+
+import { BASE_URL } from '../utils/constants';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { addUser } from '../utils/userSlice';
 import { useNavigate } from 'react-router-dom';
-import { BASE_URL } from '../utils/constants';
 
 const Login = () => {
   const [emailId, setEmailId] = useState('elon@musk.com');
   const [password, setPassword] = useState('Techa@123#');
   const [response, setResponse] = useState(null);
-  const navigate = useNavigate();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleClick = async () => {
     try {
-      const res = await axios.post(BASE_URL + '/login/', {
-        emailId,
-        password,
-      });
+      const res = await axios.post(
+        `${BASE_URL}/login/`,
+        { emailId, password },
+        { withCredentials: true }
+      );
 
-      // console.log(res.data);
-      dispatch(addUser(res.data));
+      const data = res.data;
+      dispatch(addUser(data));
+
+      setResponse(data.message);
       navigate('/');
-
-      const token = res.data.token;
-      localStorage.setItem('token', token);
-      // console.log(token, 'token saved succesfully');
-      setResponse(res.data.message);
     } catch (error) {
-      console.error(error);
       setResponse(error.message);
+      console.error(
+        'API Error:',
+        error.response?.data?.message || 'Something went wrong'
+      );
     }
   };
 
@@ -55,7 +57,7 @@ const Login = () => {
                 <span className="label-text">Password</span>
               </div>
               <input
-                type="text"
+                type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 className="input input-bordered w-full max-w-xs"
@@ -67,7 +69,7 @@ const Login = () => {
               Login
             </button>
           </div>
-          {response}
+          {<p>{response}</p>}
         </div>
       </div>
     </div>
