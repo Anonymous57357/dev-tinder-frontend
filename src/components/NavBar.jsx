@@ -1,13 +1,36 @@
-import { useSelector } from 'react-redux';
+import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import { BASE_URL } from '../utils/constants';
+import { removeUser } from '../utils/userSlice';
 
 const NavBar = () => {
   // subscriptions
   const user = useSelector((store) => store.user);
+  // console.log(user);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    try {
+      await axios.post(BASE_URL + '/logout', {}, { withCredentials: true });
+
+      dispatch(removeUser());
+
+      return navigate('/login');
+    } catch (error) {
+      console.error(error);
+      // error page for furether good exprerience
+    }
+  };
 
   return (
     <div className="navbar bg-base-200">
       <div className="flex-1">
-        <a className="btn btn-ghost normal-case text-xl">DevTinder</a>
+        <Link to="/" className="btn btn-ghost normal-case text-xl">
+          DevTinder
+        </Link>
       </div>
       {user && (
         <div className="flex-none gap-2">
@@ -27,15 +50,20 @@ const NavBar = () => {
               className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
             >
               <li>
-                <a className="justify-between">
-                  Profile
-                  <span className="badge">New</span>
-                </a>
+                <Link to="/profile">
+                  <a className="justify-between">
+                    Profile
+                    <span className="badge">New</span>
+                  </a>
+                </Link>
               </li>
               <li>
-                <a>Settings</a>
+                <Link to="/connections">Connections</Link>
               </li>
               <li>
+                <Link to="/requests">Requests</Link>
+              </li>
+              <li onClick={handleLogout}>
                 <a>Logout</a>
               </li>
             </ul>

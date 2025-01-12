@@ -21,8 +21,22 @@
 - Refactor our code to add CONSTANTS file + create a camponent folder
 - CORS - install cors in backend => add middleware to with configurations with{ credentials : true }
 
+- if token is not present or user not login redirect ot /login page
+- you should not access other route without login
+- logout feature
+- Get the feed and add the feed in the store
+- build the user card on feed
+- Edit profile feature
+- Show toast message on save of profile
+- New page - Sell all my connections
+- New page - See all my Connections requests
+- Feature - Accept/Reject Connection Request
 
-- when
+
+Remaining: 
+    - send/ignore the user card in feed
+    - Signup user
+    - E2ETesting
 
 ## project tree structure
 
