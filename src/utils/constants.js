@@ -1,1 +1,2 @@
-export const BASE_URL = 'http://localhost:8001';
+// RENDER
+export const BASE_URL = 'https://dev-tinder-h75u.onrender.com';
