@@ -33,14 +33,12 @@ const EditProfile = (props) => {
       );
 
       dispatch(addUser(res.data));
-      console.log(res);
     } catch (error) {
       setError(error.data);
       console.error(error);
     }
   };
 
-  console.log(user);
   return (
     <div className="flex justify-center py-10">
       <div className="flex justify-center mx-10">
@@ -51,7 +49,7 @@ const EditProfile = (props) => {
               <label className="form-control w-full max-w-xs py-4">
                 <div className="label">
                   <span className="label-text">First Name</span>
-                </div>
+                </div>  
                 <input
                   type="text"
                   value={firstName}

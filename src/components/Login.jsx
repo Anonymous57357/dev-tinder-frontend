@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import { BASE_URL } from '../utils/constants';
-import axios, { formToJSON } from 'axios';
+import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { addUser } from '../utils/userSlice';
 import { useNavigate } from 'react-router-dom';
@@ -11,6 +11,7 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
   const [isSignIn, setIsSignIn] = useState(false);
   const [response, setResponse] = useState(null);
@@ -30,14 +31,14 @@ const Login = () => {
 
       navigate('/');
     } catch (error) {
-      setResponse(error.response.data.error);
+      setResponse(error.response?.data?.error || 'An error occurred');
     }
   };
 
   const handleSignIn = async () => {
     try {
       const res = await axios.post(
-        BASE_URL + '/signup',
+        `${BASE_URL}/signup`,
         { firstName, lastName, emailId, password },
         { withCredentials: true }
       );
@@ -97,16 +98,58 @@ const Login = () => {
                 className="input input-bordered w-full max-w-xs"
               />
             </label>
-            <label className="form-control w-full max-w-xs my-4">
+            <label className="form-control w-full max-w-xs my-4 relative">
               <div className="label">
                 <span className="label-text">Password</span>
               </div>
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="input input-bordered w-full max-w-xs"
-              />
+              <div className="relative">
+                <input
+                  type={isPasswordVisible ? 'text' : 'password'}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="input input-bordered w-full pr-10"
+                />
+                <button
+                  type="button"
+                  className="absolute inset-y-0 right-3 flex items-center"
+                  onClick={() => setIsPasswordVisible((prev) => !prev)}
+                >
+                  {isPasswordVisible ? (
+                    // Open eye icon (visible password)
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-5 w-5"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="white"
+                      strokeWidth="2"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M1.5 12s3.5-7 10.5-7 10.5 7 10.5 7-3.5 7-10.5 7S1.5 12 1.5 12z"
+                      />
+                      <circle cx="12" cy="12" r="3" />
+                    </svg>
+                  ) : (
+                    // Eye with slash icon (hidden password)
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-5 w-5"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="white"
+                      strokeWidth="2"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M3.98 8.223a9.907 9.907 0 018.02-4.223c5.245 0 9.604 4.052 10.5 7-1.058 2.866-5.118 7-10.5 7-2.267 0-4.424-.915-6.02-2.2m-2.27-2.42l.27-.38M3 3l18 18"
+                      />
+                    </svg>
+                  )}
+                </button>
+              </div>
             </label>
           </div>
           <div className="card-actions justify-center">
