@@ -21,6 +21,7 @@ const Body = () => {
       // console.log(res.data);
       dispatch(addUser(res?.data));
     } catch (error) {
+      console.log(error);
       if (error.status == 400 || error.status == 401) {
         if (!userData) {
           navigate('/login');

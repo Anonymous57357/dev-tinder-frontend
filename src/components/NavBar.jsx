@@ -18,7 +18,7 @@ const NavBar = () => {
 
       dispatch(removeUser());
 
-      return navigate('/login');
+      navigate('/login');
     } catch (error) {
       console.error(error);
       // error page for furether good exprerience
@@ -27,9 +27,9 @@ const NavBar = () => {
 
   return (
     <div className="navbar bg-base-200">
-      <div className="flex-1">
-        <Link to="/" className="btn btn-ghost normal-case text-xl">
-          DevTinder
+      <div className="flex-1"> 
+        <Link to="/" className="btn btn-ghost normal-case text-xl"> 
+          DevTinder 
         </Link>
       </div>
       {user && (
