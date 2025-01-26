@@ -27,7 +27,7 @@ const Login = () => {
       );
 
       console.log(res.data);
-      dispatch(addUser(res.data));
+      dispatch(addUser(res?.data));
 
       navigate('/');
     } catch (error) {
@@ -45,7 +45,7 @@ const Login = () => {
 
       console.log(res.data);
 
-      dispatch(addUser(res.data));
+      dispatch(addUser(res?.data));
       navigate('/profile');
     } catch (error) {
       console.log(error);

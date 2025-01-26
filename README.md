@@ -52,3 +52,16 @@ Route=/logout => logout
 
 footer
 # dev-tinder-frontend
+
+## GDL Namaste Node JS S03
+
+#  S03E01 Launching a AWS Instance and deploying frontend
+
+# Deployment
+
+1. First create a aws accound and redirect console
+2. go to Ec2
+3. instances
+4. Launch a instances
+5. Name -> quickstart (ubuntu) -> Amazon Machine Image (AMI) -> instance type (auto) (free) -> create a key pair (and download .pem file) -> launch a instance --> instance id -> connect -> SSH client -> open terminal -> change permission .pem file ->  
+5. terminal -> install -> nvm v18.20.5 -> 

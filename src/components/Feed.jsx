@@ -1,4 +1,4 @@
-  import axios from 'axios';
+import axios from 'axios';
 import { BASE_URL } from '../utils/constants';
 import { useDispatch, useSelector } from 'react-redux';
 import { addFeed } from '../utils/feedSlice';
@@ -13,20 +13,20 @@ const Feed = () => {
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
- const feedData = async () => {
-  try {
-    const res = await axios.get(BASE_URL + '/feed', {
-      withCredentials: true,
-    });
-    dispatch(addFeed(res.data));
-  } catch (error) {
-    if (error.response?.status === 400 || error.response?.status === 401) {
-      navigate('/login'); // Ensure this redirects unauthenticated users
-    } else {
-      console.error("Error fetching feed:", error);
+  const feedData = async () => {
+    try {
+      const res = await axios.get(BASE_URL + '/feed', {
+        withCredentials: true,
+      });
+      dispatch(addFeed(res?.data));
+    } catch (error) {
+      if (error.response?.status === 400 || error.response?.status === 401) {
+        navigate('/login'); // Ensure this redirects unauthenticated users
+      } else {
+        console.error('Error fetching feed:', error);
+      }
     }
-  }
-};
+  };
 
   useEffect(() => {
     feedData();

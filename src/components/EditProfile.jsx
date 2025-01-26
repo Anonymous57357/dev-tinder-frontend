@@ -32,7 +32,7 @@ const EditProfile = (props) => {
         { withCredentials: true }
       );
 
-      dispatch(addUser(res.data));
+      dispatch(addUser(res?.data));
     } catch (error) {
       setError(error.data);
       console.error(error);
