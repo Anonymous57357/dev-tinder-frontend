@@ -75,3 +75,6 @@ footer
       --> copy code from dist(build files) to /var/www/html (from prod github to nginx http server repostiry)
       --> sudo scp -r  dist/* /var/www/html/
       --> Enable port : 80 of your instance   
+
+   Backend: 
+      --> 
